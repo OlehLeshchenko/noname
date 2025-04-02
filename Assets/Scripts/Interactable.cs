@@ -1,7 +1,19 @@
 using UnityEngine;
 
-public interface Interactable
+public abstract class Interactable : MonoBehaviour
 {
-    void Interact(PlayerInteraction player);
-    string GetDescription();
+    public bool useEvents;
+    [SerializeField] public string promptMessage;
+
+    public void BaseInteract()
+    {
+        if (useEvents)
+            GetComponent<InteractionEvent>().OnInteract.Invoke();
+        Interact();
+    }
+
+    protected virtual void Interact()
+    {
+       
+    }
 }
